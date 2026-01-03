@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Author Dosphy
  * @Date 2026/1/3 13:15
  */
-@Configuration
+//@Configuration TODO之后改回来
 public class RedisConfig {
 
     @Value("${spring.redis.host}")

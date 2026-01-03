@@ -18,3 +18,8 @@ spring:
 logging:
   level:
     com.work: warn
+
+#SQL日志打印
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

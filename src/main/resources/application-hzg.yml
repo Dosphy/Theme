@@ -15,3 +15,23 @@ spring:
   elasticsearch:
     host: localhost
     port: 9200
+
+#阿里百炼大模型
+langchain4j:
+  community:
+    dashscope:
+      chat-model:
+        api-key: 111
+        model-name: qwen-flash
+      embedding-model:
+        api-key: 111
+        model-name: text-embedding-v4
+      streaming-chat-model:
+        api-key: 111
+        model-name: qwen-flash
+
+#pinecone向量数据库
+pineconeEmbeddingStore:
+  apiKey: pcsk_mSRVo_HZfUw6iKbdT235owE7Ry994UjvFsWQ35N3h6ALsGhWCtCnV8dqympKoAfEKYWCN
+  index: xiaobao-index
+  nameSpace: xiaobao-namespace

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @Date 2026/1/3 13:12
  */
 //开启AOP
-@EnableAspectJAutoProxy(exposeProxy = true)
+//@EnableAspectJAutoProxy(exposeProxy = true)
 @SpringBootApplication
 @MapperScan("com.work.mapper")
 public class ThemeApplication {

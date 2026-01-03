@@ -5,47 +5,32 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.8</version>
+        <version>3.2.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.work</groupId>
     <artifactId>Theme</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
-        <java.version>1.7</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
 <!--        redis          -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.data</groupId>
-                    <artifactId>spring-data-redis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.lettuce</groupId>
-                    <artifactId>lettuce-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
             <version>2.6.2</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.lettuce</groupId>-->
-<!--            <artifactId>lettuce-core</artifactId>-->
-<!--            <version>6.1.6.RELEASE</version>-->
-<!--        </dependency>-->
 
-
-<!--        <dependency>-->
-<!--            <groupId>org.apache.commons</groupId>-->
-<!--            <artifactId>commons-pool2</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
+        </dependency>
 
 <!--        web-->
         <dependency>
@@ -124,10 +109,67 @@
             <version>2.0.36</version>
             <scope>test</scope>
         </dependency>
+        <!-- 前后端分离中的后端接口测试工具 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+            <version>4.3.0</version>
+        </dependency>
 
+        <!-- 接入阿里云百炼平台 -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-community-dashscope-spring-boot-starter</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+
+        <!--langchain4j高级功能-->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-spring-boot-starter</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+
+        <!-- Spring Boot Starter Data MongoDB -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <!--解析pdf文档-->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-document-parser-apache-pdfbox</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+
+        <!--简单的rag实现-->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-easy-rag</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-pinecone</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
+
+        <!--流式输出-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>3.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-reactor</artifactId>
+            <version>1.0.0-beta3</version>
+        </dependency>
     </dependencies>
 
-<!--    <build>-->
+
+    <!--    <build>-->
 <!--        <plugins>-->
 <!--            <plugin>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
