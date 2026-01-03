@@ -18,6 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
+//        TODO登录注册url去除限制
 
     }
 }
