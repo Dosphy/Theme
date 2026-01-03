@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+#    配置生效项
+    active: hzg
+
+  jackson:
+    default-property-inclusion: non_null # JSON处理时忽略非空字段
+
+
+# 后续设置别名扫描包(实体类包相对路径)
+#mybatis-plus:
+#  type-aliases-package: com
+
+#日志
+logging:
+  level:
+    com.work: warn
