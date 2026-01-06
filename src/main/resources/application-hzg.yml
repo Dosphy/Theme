@@ -15,6 +15,10 @@ spring:
   elasticsearch:
     host: localhost
     port: 9200
+  data:
+    #    mongodb数据库
+    mongodb:
+      uri: mongodb://localhost:27017/chat_memory_db
 
 #阿里百炼大模型
 langchain4j:
@@ -24,7 +28,7 @@ langchain4j:
         api-key: 111
         model-name: qwen-flash
       embedding-model:
-        api-key: 111
+        api-key: sk-5385239e3c9942a282c812df99fd5bf0
         model-name: text-embedding-v4
       streaming-chat-model:
         api-key: 111
@@ -32,6 +36,7 @@ langchain4j:
 
 #pinecone向量数据库
 pineconeEmbeddingStore:
-  apiKey: pcsk_mSRVo_HZfUw6iKbdT235owE7Ry994UjvFsWQ35N3h6ALsGhWCtCnV8dqympKoAfEKYWCN
-  index: xiaobao-index
+  apiKey: pcsk_7EbtHr_TFmTkmopXfvHrq1QG552ZdJa6sTovSqG6XKt1QT7gNQ6Xgje3jmSjiMnXxMGE43
+  index: keshe
   nameSpace: xiaobao-namespace
+

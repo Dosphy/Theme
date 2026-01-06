@@ -4,6 +4,10 @@ import dev.langchain4j.community.model.dashscope.QwenChatModel;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.embedding.EmbeddingModel;
+import dev.langchain4j.store.embedding.EmbeddingStore;
+import dev.langchain4j.store.embedding.pinecone.PineconeEmbeddingStore;
+import dev.langchain4j.store.embedding.pinecone.PineconeServerlessIndexConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -40,5 +44,33 @@ public class AiConfig {
                 .maxMessages(20)
                 .chatMemoryStore(mongoChatMemoryStore)
                 .build();
+    }
+
+    @Autowired
+    private EmbeddingModel embeddingModel;
+
+    @Value("${pineconeEmbeddingStore.apiKey}")
+    private String embeddingApiKey;
+
+    @Value("${pineconeEmbeddingStore.index}")
+    private String embeddingIndex;
+
+    @Value("${pineconeEmbeddingStore.nameSpace}")
+    private String embeddingNameSpace;
+
+    @Bean
+    public EmbeddingStore<TextSegment> embeddingStore() {
+        EmbeddingStore<TextSegment> embeddingStore = PineconeEmbeddingStore.builder()
+                .apiKey(embeddingApiKey)
+                .index(embeddingIndex)
+                .nameSpace(embeddingNameSpace)
+                .createIndex(PineconeServerlessIndexConfig.builder()
+                        .cloud("AWS")
+                        .region("us-east-1")
+                        .dimension(embeddingModel.dimension())
+                        .build())
+                .build();
+
+        return embeddingStore;
     }
 }
