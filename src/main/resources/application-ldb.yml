@@ -54,3 +54,14 @@ mybatis-plus:
     sql-parser-cache: true
   type-aliases-package: com.work.domain.pojo
   mapper-locations: classpath*:mapper/**/*.xml
+
+management:
+  health:
+    redisson:
+      enabled: false
+    redis:
+      enabled: false
+    elasticsearch:
+      enabled: false
+    rabbit:
+      enabled: false
