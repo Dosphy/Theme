@@ -5,12 +5,16 @@ import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
-import dev.langchain4j.store.embedding.EmbeddingStore;
-import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
-import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
+
+
+import dev.langchain4j.store.embedding.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.nio.file.FileSystems;
+import java.nio.file.PathMatcher;
+import java.util.List;
 
 /**
  * @Author Dosphy
@@ -21,7 +25,7 @@ public class RAGTest {
 
     @Test
     public void testReadDocument() {
-        Document document = FileSystemDocumentLoader.loadDocument("C:\\Users\\LHL\\Desktop\\1.md");
+        Document document = FileSystemDocumentLoader.loadDocument("D:\\IDEA\\Project\\Theme\\data\\1.md");
         System.out.println(document.text());
     }
 
@@ -33,28 +37,45 @@ public class RAGTest {
 
     @Test
     public void testEmbeddingStore() {
-        TextSegment segment1 = TextSegment.from("我叫Dosphy,我是个计算机学生");
+        TextSegment segment1 = TextSegment.from("七个老八");
         Embedding embedding1 = embeddingModel.embed(segment1).content();
 
         //存入向量数据库
         embeddingStore.add(embedding1,segment1);
-
-
-//        TextSegment segment2 = TextSegment.from("");
-//        Embedding embedding2 = embeddingModel.embed(segment2).content();
-
-        //存入向量数据库
-//        embeddingStore.add(embedding2,segment2);
     }
 
-    //加载文档并存入内存向量数据库
-    @Test
-    public void testReadDocumentAndStore(){
-        Document document = FileSystemDocumentLoader.loadDocument("C:\\Users\\LHL\\Desktop\\1.md");
-        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
 
-        EmbeddingStoreIngestor.ingest(document,embeddingStore);
-        System.out.println(embeddingStore);
+    @Test
+    public void testUploadKnowledgeLibrary() {
+        PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:*.md");
+        List<Document> documents = FileSystemDocumentLoader.loadDocuments("D:\\IDEA\\Project\\Theme\\data", pathMatcher);
+
+        //文本向量化并存入向量数据库：将每个片段进行向量化，得到一个嵌入向量
+        IngestionResult ingest = EmbeddingStoreIngestor.builder()
+                .embeddingStore(embeddingStore)
+                .embeddingModel(embeddingModel)
+                .build()
+                .ingest(documents);
+        System.out.println(ingest.toString());
+    }
+
+    @Test
+    public void testEmbeddingSearch() {
+        //提问，并将问题转成向量数据
+        Embedding queryEmbedding = embeddingModel.embed("你是谁？").content();
+        //创建搜索对象
+        EmbeddingSearchRequest searchRequest = EmbeddingSearchRequest.builder()
+                .queryEmbedding(queryEmbedding)
+                .maxResults(1)
+                .build();
+
+        //根据搜索请求在向量存储中进行相似度搜索
+        EmbeddingSearchResult<TextSegment> searchResult = embeddingStore.search(searchRequest);
+        //获取搜索结果匹配列表中的第一个匹配项
+        EmbeddingMatch<TextSegment> embeddingMatch = searchResult.matches().get(0);
+
+        System.out.println(embeddingMatch.score());
+        System.out.println(embeddingMatch.embedded().toString());
     }
 
 
