@@ -40,3 +40,9 @@ pineconeEmbeddingStore:
   index: keshe
   nameSpace: xiaobao-namespace
 
+management:
+  health:
+    redis:
+      enabled: false
+    elasticsearch:
+      enabled: false

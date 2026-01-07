@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/hmdp?useSSL=false&serverTimezone=UTC
     username: root
-    password: 123456789
+    password: 123456
   redis:
     host: localhost
     port: 6379
@@ -15,3 +15,53 @@ spring:
   elasticsearch:
     host: localhost
     port: 9200
+  data:
+    #    mongodb数据库
+    mongodb:
+      uri: mongodb://localhost:27017/chat_memory_db
+
+#阿里百炼大模型
+langchain4j:
+  community:
+    dashscope:
+      chat-model:
+        api-key: sk-401f04bff45540b1b7e818282e32127a
+        model-name: qwen-flash
+      embedding-model:
+        api-key: sk-401f04bff45540b1b7e818282e32127a
+        model-name: text-embedding-v4
+      streaming-chat-model:
+        api-key: sk-401f04bff45540b1b7e818282e32127a
+        model-name: qwen-flash
+
+#pinecone向量数据库
+pineconeEmbeddingStore:
+  apiKey: pcsk_7EbtHr_TFmTkmopXfvHrq1QG552ZdJa6sTovSqG6XKt1QT7gNQ6Xgje3jmSjiMnXxMGE43
+  index: keshe
+  nameSpace: xiaobao-namespace
+
+mybatis-plus:
+  global-config:
+    enable-sql-runner: true
+    banner: false
+    db-config:
+      table-prefix: tb_
+      id-type: auto
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    # 自动建表配置
+    sql-parser-cache: true
+  type-aliases-package: com.work.domain.pojo
+  mapper-locations: classpath*:mapper/**/*.xml
+
+management:
+  health:
+    redisson:
+      enabled: false
+    redis:
+      enabled: false
+    elasticsearch:
+      enabled: false
+    rabbit:
+      enabled: false
