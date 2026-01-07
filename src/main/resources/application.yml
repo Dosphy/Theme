@@ -4,7 +4,7 @@ server:
 spring:
   profiles:
 #    配置生效项
-    active: hzg
+    active: ldb
 
   jackson:
     default-property-inclusion: non_null # JSON处理时忽略非空字段
