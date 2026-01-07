@@ -2,6 +2,7 @@ package com.work.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.work.domain.pojo.Appointment;
+import com.work.domain.pojo.Lesson;
 
 /**
  * @Author Dosphy
@@ -10,4 +11,5 @@ import com.work.domain.pojo.Appointment;
 public interface AppointmentService extends IService<Appointment> {
     Appointment getOne(Appointment appointment);
 
+    Lesson getOne(Lesson lesson);
 }

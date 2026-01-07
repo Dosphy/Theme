@@ -1,6 +1,7 @@
 package com.work.tools;
 
 import com.work.domain.pojo.Appointment;
+import com.work.domain.pojo.Lesson;
 import com.work.service.AppointmentService;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
@@ -17,7 +18,8 @@ public class AppointmentTools {
     @Autowired
     AppointmentService appointmentService;
 
-    @Tool(name="预约挂号", value = "根据参数，先执行工具方法queryDepartment查询是否可预约，并直接给用户回答是否可预约，并让用户确认所有预约信息，用户确认后再进行预约。如果用户没有提供具体的医生姓名，请从向量存储中找到一位医生。")
+    //TODO可行性待研究
+    @Tool(name="制定学习计划", value = "根据参数，先执行工具方法quertBySubjectAndTeacher查询是否存在相关课程，并直接给用户回答是否可制定计划，并让用户确认所有学习计划信息，用户确认后再进行制定。")
     public String bookAppointment(Appointment appointment) {
         //查找数据库中是否包含对应的预约记录
         Appointment one = appointmentService.getOne(appointment);
@@ -25,49 +27,42 @@ public class AppointmentTools {
         if (one == null) {
             appointment.setId(null);//防止大模型幻觉设置了id
             if(appointmentService.save(appointment)) {
-                return "预约成功，返回预约详情...";
+                return "制定学习计划成功，返回学习计划详情...";
             } else
-                return "预约失败...";
+                return "制定学习计划失败...";
         }
 
-        return "您在相同的科室和时间已有预约";
+        return "您已有相同学习计划";
     }
 
-    @Tool(name = "取消预约挂号",value = "根据参数，查询预约是否存在，如果存在则删除预约记录并返回取消预约成功，否则返回取消预约失败。")
+    @Tool(name = "取消学习计划",value = "根据参数，查询学习计划是否存在，如果存在则删除学习计划并返回取消学习计划成功，否则返回取消学习计划失败。")
     public String cancelAppointment(Appointment appointment) {
-        //查找数据库中是否包含对应的预约记录
+        //查找数据库中是否包含对应的学习计划
         Appointment one = appointmentService.getOne(appointment);
 
 
         if (one != null) {
             if(appointmentService.removeById(one.getId())){
-                return "取消预约成功...";
+                return "取消学习计划成功...";
             } else
-                return "取消预约失败...";
+                return "取消学习计划失败...";
         }
 
         return "您没有预约记录，请核对预约科室和时间";
     }
 
-    @Tool(name = "查询是否有号源",value = "根据科室名称，日期，时间和医生查询是否有号源，并返回给用户")
-    public boolean quertByDepartment(
-            @P(value = "科室名称") String name,
-            @P(value = "日期") String date,
-            @P(value = "时间,可选值:上午、下午") String time,
-            @P(value = "医生名称") String doctorName
-    ) {
-        System.out.println("查询是否有号源");
-        System.out.println("科室名称：" + name);
-        System.out.println("日期：" + date);
-        System.out.println("时间：" + time);
-        System.out.println("医生名称：" + doctorName);
+    @Tool(name = "查询是否有课程",value = "根据课程名称，课程对应老师查询是否有课程，并返回给用户")
+    public boolean quertBySubjectAndTeacher(Lesson lesson) {
+        System.out.println("查询是否有课程");
+        System.out.println("课程名称：" + lesson.getSubject());
+        System.out.println("课程对应老师：" + lesson.getTeacher());
 
-        //TODO 维护医生的排班信息：
-        //如果没有指定医生名字，则根据其他条件查询是否有可以预约的医生（有返回true，否则返回false）；
+        //查找数据库是否存在相关课程
+        Lesson one = appointmentService.getOne(lesson);
 
-        //如果指定了医生名字，则判断医生是否有排班（没有排版返回false）
-        //如果有排班，则判断医生排班时间段是否已约满（约满返回false，有空闲时间返回true）
-
-        return true;
+        if(one != null) {
+            return true;
+        } else
+            return false;
     }
 }
