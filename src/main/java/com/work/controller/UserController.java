@@ -5,6 +5,7 @@ import com.work.domain.pojo.RegisterForm;
 import com.work.domain.pojo.Result;
 import com.work.domain.pojo.User;
 import com.work.service.impl.UserService;
+import com.work.utils.UserContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class UserController {
             return Result.fail("用户名或密码错误");
         }
         // 登录成功，返回用户信息
+        UserContextHolder.setUser(user);
         return Result.ok(user);
     }
 

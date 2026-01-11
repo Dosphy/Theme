@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/hmdp?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/keshexiaobao?useSSL=false&serverTimezone=UTC
     username: root
     password: 123456789
   redis:
@@ -25,13 +25,13 @@ langchain4j:
   community:
     dashscope:
       chat-model:
-        api-key: sk-5385239e3c9942a282c812df99fd5bf0
+        api-key: sk-401f04bff45540b1b7e818282e32127a
         model-name: qwen-flash
       embedding-model:
-        api-key: sk-5385239e3c9942a282c812df99fd5bf0
+        api-key: sk-401f04bff45540b1b7e818282e32127a
         model-name: text-embedding-v4
       streaming-chat-model:
-        api-key: sk-5385239e3c9942a282c812df99fd5bf0
+        api-key: sk-401f04bff45540b1b7e818282e32127a
         model-name: qwen-flash
 
 #pinecone向量数据库
@@ -45,4 +45,6 @@ management:
     redis:
       enabled: false
     elasticsearch:
+      enabled: false
+    rabbit:
       enabled: false

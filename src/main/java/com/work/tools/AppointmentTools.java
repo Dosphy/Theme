@@ -19,7 +19,7 @@ public class AppointmentTools {
     AppointmentService appointmentService;
 
     //TODO可行性待研究
-    @Tool(name="制定学习计划", value = "根据参数，先执行工具方法quertBySubjectAndTeacher查询是否存在相关课程，并直接给用户回答是否可制定计划，并让用户确认所有学习计划信息，用户确认后再进行制定。")
+    @Tool(name="制定学习计划", value = "根据参数，先执行工具方法quertBySubjectAndTeacher查询是否存在相关课程，存在则回答存在相关课程及老师，是否要制定计划，若用户回答是，则随机设置学习时长（单位周）并告知用户后执行后续的制定操作，不存在则返回不存在相关课程或老师，不要过多回答。")
     public String bookAppointment(Appointment appointment) {
         //查找数据库中是否包含对应的预约记录
         Appointment one = appointmentService.getOne(appointment);

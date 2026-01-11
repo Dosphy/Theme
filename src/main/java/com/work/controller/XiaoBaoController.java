@@ -2,6 +2,7 @@ package com.work.controller;
 
 import com.work.assistant.XiaoBaoAgent;
 import com.work.domain.pojo.ChatForm;
+import com.work.utils.UserContextHolder;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import reactor.core.publisher.Flux;
  */
 @RestController
 @Tag(name = "小包AI助手")
-@RequestMapping("/xiaobao")
+@RequestMapping("/api/xiaobao")
 public class XiaoBaoController {
     @Autowired
     private XiaoBaoAgent xiaoBaoAgent;

@@ -30,6 +30,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             // 密码不正确
             return null;
         }
+        //TODO后续添加token到redis
+
         return user;
     }
 
