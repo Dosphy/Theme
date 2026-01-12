@@ -2,6 +2,7 @@ package com.work.controller;
 
 import com.work.assistant.XiaoBaoAgent;
 import com.work.domain.pojo.ChatForm;
+import com.work.domain.pojo.User;
 import com.work.utils.UserContextHolder;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,7 +27,10 @@ public class XiaoBaoController {
     @Operation(summary = "对话功能")
     @PostMapping(value = "/chat",produces = "text/stream;charset=utf-8")
     public Flux<String> chat(@RequestBody ChatForm chatForm) {
-        return xiaoBaoAgent.chat(chatForm.getMemoryId(),chatForm.getUserMessage());
+        // 组合userId和memoryId，格式: userId:memoryId
+        Long userId = UserContextHolder.getCurrentUserId();
+        String combinedMemoryId = userId + ":" + chatForm.getMemoryId();
+        return xiaoBaoAgent.chat(combinedMemoryId, chatForm.getUserMessage());
     }
 
 }

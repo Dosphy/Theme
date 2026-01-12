@@ -8,7 +8,6 @@ import lombok.Data;
  */
 @Data
 public class ChatForm {
-    //TODO添加userid作为区分
     private String memoryId;
     private String userMessage;
 }

@@ -1,6 +1,7 @@
 package com.work.config;
 
 import com.work.domain.pojo.ChatMessages;
+import com.work.utils.UserContextHolder;
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.ChatMessageDeserializer;
 import dev.langchain4j.data.message.ChatMessageSerializer;
@@ -44,6 +45,7 @@ public class MongoChatMemoryStore implements ChatMemoryStore {
         Criteria criteria = Criteria.where("memoryId").is(memoryId);
         Query query = new Query(criteria);
         Update update = new Update();
+        update.set("memoryId", memoryId);
         update.set("content", ChatMessageSerializer.messagesToJson(list));
         mongoTemplate.upsert(query, update, ChatMessages.class);
     }

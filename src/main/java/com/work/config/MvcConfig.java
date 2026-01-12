@@ -1,6 +1,9 @@
 package com.work.config;
 
+import com.work.interceptor.LoginInterceptor;
+import com.work.interceptor.RefreshTokenInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,7 +21,12 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-//        TODO登录注册url去除限制
-
+        registry.addInterceptor(new LoginInterceptor(stringRedisTemplate))
+                .excludePathPatterns(
+                        "/api/user/login",
+                        "/api/user/register"
+                )
+                .order(1);
+        registry.addInterceptor(new RefreshTokenInterceptor(stringRedisTemplate)).order(0);
     }
 }
