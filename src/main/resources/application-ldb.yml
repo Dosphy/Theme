@@ -7,14 +7,6 @@ spring:
   redis:
     host: localhost
     port: 6379
-  rabbitmq:
-    addresses: localhost
-    port: 5672
-    username: guest
-    password: guest
-  elasticsearch:
-    host: localhost
-    port: 9200
   data:
     #    mongodb数据库
     mongodb:
@@ -54,14 +46,3 @@ mybatis-plus:
     sql-parser-cache: true
   type-aliases-package: com.work.domain.pojo
   mapper-locations: classpath*:mapper/**/*.xml
-
-management:
-  health:
-    redisson:
-      enabled: false
-    redis:
-      enabled: false
-    elasticsearch:
-      enabled: false
-    rabbit:
-      enabled: false

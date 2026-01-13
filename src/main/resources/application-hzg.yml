@@ -7,11 +7,6 @@ spring:
   redis:
     host: localhost
     port: 6379
-  rabbitmq:
-    addresses: localhost
-    port: 5672
-    username: guest
-    password: guest
   elasticsearch:
     host: localhost
     port: 9200
@@ -39,12 +34,3 @@ pineconeEmbeddingStore:
   apiKey: pcsk_6g1dju_7M1KqE1B5hnTwCnPZTHZmfw8YYqsEpzixmTs2qMsGpD2HHSrfeV8diqkRSydNfQ
   index: keshe
   nameSpace: xiaobao-namespace
-
-management:
-  health:
-    redis:
-      enabled: false
-    elasticsearch:
-      enabled: false
-    rabbit:
-      enabled: false

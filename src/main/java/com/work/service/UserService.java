@@ -1,4 +1,4 @@
-package com.work.service.impl;
+package com.work.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.work.domain.pojo.LoginForm;
