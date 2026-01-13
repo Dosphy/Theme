@@ -17,9 +17,10 @@ spring:
 #日志
 logging:
   level:
-    com.work: warn
+    com.work: debug
 
 #SQL日志打印
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false

@@ -11,6 +11,9 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author Dosphy
  * @Date 2026/1/7 11:36
@@ -45,4 +48,12 @@ public class AppointmentServiceImpl extends ServiceImpl<AppointmentMapper, Appoi
         Lesson lessonDB = lessonMapper.selectOne(queryWrapper);
         return lessonDB;
     }
+
+    @Override
+    public List<Lesson> getAllLessons() {
+        LambdaQueryWrapper<Lesson> queryWrapper = new LambdaQueryWrapper<>();
+        List<Lesson> lessons = lessonMapper.selectList(queryWrapper);
+        return lessons;
+    }
+
 }

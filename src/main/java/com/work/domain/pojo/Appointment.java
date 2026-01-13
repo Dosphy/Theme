@@ -1,6 +1,7 @@
 package com.work.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +22,6 @@ public class Appointment {
     private String teacher;
     private String subject;
     private String time;
+    @TableField(value = "addTime")
     private String addTime;
 }
