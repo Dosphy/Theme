@@ -1,11 +1,13 @@
 package com.work.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @TableName("tb_question")
@@ -21,4 +23,8 @@ public class Question {
     private Integer status; // 状态：0-禁用，1-启用
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    
+    // 非数据库字段，用于前端展示选项
+    @TableField(exist = false)
+    private List<Option> options;
 }

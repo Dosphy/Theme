@@ -55,9 +55,28 @@ public class QuestionController {
                               @RequestParam(required = false) Integer type,
                               @RequestParam(required = false) Integer difficulty,
                               @RequestParam(required = false) Long categoryId) {
-        // 这里可以根据需要实现复杂的查询逻辑
-        List<Question> questions = questionService.list();
-        return Result.ok(questions);
+        // 根据categoryId筛选题目
+        LambdaQueryWrapper<Question> wrapper = new LambdaQueryWrapper<>();
+        if (categoryId != null) {
+            wrapper.eq(Question::getCategoryId, categoryId);
+        }
+        
+        // 获取题目列表
+        List<Question> questions = questionService.list(wrapper);
+        
+        // 为每个题目获取选项
+        for (Question question : questions) {
+            List<Option> options = optionService.getOptionsByQuestionId(question.getId());
+            question.setOptions(options);
+        }
+        
+        // 返回前端期望的格式
+        Map<String, Object> responseData = Map.of(
+                "questions", questions,
+                "categoryName", "题库"
+        );
+        
+        return Result.ok(responseData);
     }
     
     /**

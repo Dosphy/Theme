@@ -47,7 +47,7 @@ public class UserController {
         Map<String, Object> userMap = BeanUtil.beanToMap(user,new HashMap<>(),
                 CopyOptions.create()
                         .setIgnoreNullValue(true)
-                        .setFieldValueEditor((fieldName,fieldValue) -> fieldValue.toString())
+                        .setFieldValueEditor((fieldName,fieldValue) -> fieldValue != null ? fieldValue.toString() : null)
 
         );
         stringRedisTemplate.opsForHash().putAll(LOGIN_USER_KEY+token,userMap);
