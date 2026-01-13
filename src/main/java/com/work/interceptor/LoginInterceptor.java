@@ -49,6 +49,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 请求结束后，清除ThreadLocal中的信息，避免内存泄漏
+        System.out.println("清除ThreadLocal信息...");
         UserContextHolder.clear();
     }
 }

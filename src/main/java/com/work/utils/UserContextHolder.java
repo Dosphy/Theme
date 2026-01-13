@@ -14,7 +14,8 @@ import com.work.domain.pojo.User;
 public class UserContextHolder {
 
     // 定义ThreadLocal，泛型为用户上下文类
-    private static final ThreadLocal<User> USER_CONTEXT = new ThreadLocal<>();
+    // InheritableThreadLocal可以自动将父线程的 ThreadLocal 数据传递给子线程
+    private static final ThreadLocal<User> USER_CONTEXT = new InheritableThreadLocal<>();
 
     /**
      * 存入用户信息
