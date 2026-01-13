@@ -1,4 +1,4 @@
-package com.work.service.impl.impl;
+package com.work.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -6,7 +6,7 @@ import com.work.mapper.UserMapper;
 import com.work.domain.pojo.LoginForm;
 import com.work.domain.pojo.RegisterForm;
 import com.work.domain.pojo.User;
-import com.work.service.impl.UserService;
+import com.work.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
